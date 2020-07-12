@@ -1,17 +1,12 @@
 <template>
   <div id="app">
-    <first-form />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import FirstForm from './components/FirstForm.vue'
-
 export default {
   name: 'App',
-  components: {
-    FirstForm
-  }
 }
 </script>
 

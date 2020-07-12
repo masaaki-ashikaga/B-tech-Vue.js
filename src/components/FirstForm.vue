@@ -39,7 +39,7 @@
   </div>
 </div>
 <div class="has-text-centered">
-  <button type="submit" class="button is-primary">次へ進む</button>
+  <router-link to="/second" class="button is-primary">次へ進む</router-link>
 </div>
 </div>
 </template>

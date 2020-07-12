@@ -2,20 +2,13 @@
 <div>
 <div class="w-600 box">
   <div>
-    <h1 class="is-size-5 has-text-weight-bold">以下にお答えください</h1>
+    <h1 class="is-size-5 has-text-weight-bold">ご相談内容をご記入ください</h1>
   </div>
   <div class="customer-info-form">
     <form>
       <div>
-        <p class="has-text-weight-bold has-text-link">現在、生命保険に加入されていますか？</p>
-        <div class="control mt-2 mb-6">
-          <label class="radio mr-3">
-            <input type="radio" name="question1" id="yes" value="yes" v-model="answerData.question1">はい
-          </label>
-          <label class="radio">
-            <input type="radio" name="question1" id="no" value="no" v-model="answerData.question1">いいえ
-          </label>
-        </div>
+        <p class="has-text-weight-bold has-text-link mb-5">-ご相談内容-</p>
+        <textarea class="textarea" rows="10"></textarea>
       </div>
 
       <div v-show="answerData.question1">
@@ -45,8 +38,8 @@
   </div>
 </div>
 <div class="has-text-centered">
-  <router-link to="/" class="button is-primary mr-6">前に戻る</router-link>
-  <router-link to="/third" class="button is-primary">次へ進む</router-link>
+  <router-link to="/second" class="button is-primary mr-6">前に戻る</router-link>
+  <router-link to="" class="button is-primary">次へ進む</router-link>
 </div>
 </div>
 </template>
