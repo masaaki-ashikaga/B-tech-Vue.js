@@ -9,15 +9,9 @@ const mutations = {
         state.gender = newGender;
     },
 };
-const actions = {
-    updateGender({commit}, newGender){
-        commit('updateGender', newGender);
-    },
-};
 
 export default {
     state,
     getters,
     mutations,
-    actions,
 };

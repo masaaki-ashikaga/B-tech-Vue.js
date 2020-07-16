@@ -9,15 +9,9 @@ const mutations = {
         state.question3 = newQuestion3;
     },
 };
-const actions = {
-    updateQuestion3({commit}, newQuestion3){
-        commit('updateQuestion3', newQuestion3);
-    },
-};
 
 export default {
     state,
     getters,
     mutations,
-    actions,
 };

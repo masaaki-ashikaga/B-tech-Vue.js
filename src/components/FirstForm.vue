@@ -53,7 +53,7 @@ export default {
         return this.$store.getters.gender;
       },
       set(value) {
-        this.$store.dispatch('updateGender', value);
+        this.$store.commit('updateGender', value);
       }
     },
     year: {
@@ -61,7 +61,7 @@ export default {
         return this.$store.getters.year;
       },
       set(value) {
-        this.$store.dispatch('updateYear', value);
+        this.$store.commit('updateYear', value);
       }
     },
     month: {
@@ -69,7 +69,7 @@ export default {
         return this.$store.getters.month;
       },
       set(value) {
-        this.$store.dispatch('updateMonth', value);
+        this.$store.commit('updateMonth', value);
       }
     },
     date: {
@@ -77,7 +77,7 @@ export default {
         return this.$store.getters.date;
       },
       set(value) {
-        this.$store.dispatch('updateDate', value);
+        this.$store.commit('updateDate', value);
       }
     },
   },

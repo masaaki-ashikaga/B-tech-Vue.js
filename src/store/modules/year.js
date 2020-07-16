@@ -9,15 +9,9 @@ const mutations = {
         state.year = newYear;
     },
 };
-const actions = {
-    updateYear({commit}, newYear){
-        commit('updateYear', newYear);
-    },
-};
 
 export default {
     state,
     getters,
     mutations,
-    actions,
 };

@@ -29,7 +29,7 @@ export default {
         return this.$store.getters.message;
       },
       set(value) {
-        this.$store.dispatch('updateMessage', value);
+        this.$store.commit('updateMessage', value);
       }
     }
   },

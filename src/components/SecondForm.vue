@@ -54,21 +54,13 @@
 <script>
 import 'bulma/css/bulma.css';
 export default {
-  // data(){
-  //   return{
-  //     answerData: {
-  //       question1: '',
-  //       question2: '',
-  //     }
-  //   };
-  // }
   computed: {
     question1 :{
       get() {
         return this.$store.getters.question1;
       },
       set(value){
-        this.$store.dispatch('updateQuestion1', value);
+        this.$store.commit('updateQuestion1', value);
       }
     },
     question2 :{
@@ -76,7 +68,7 @@ export default {
         return this.$store.getters.question2;
       },
       set(value){
-        this.$store.dispatch('updateQuestion2', value);
+        this.$store.commit('updateQuestion2', value);
       }
     },
     question3 :{
@@ -84,7 +76,7 @@ export default {
         return this.$store.getters.question3;
       },
       set(value){
-        this.$store.dispatch('updateQuestion3', value);
+        this.$store.commit('updateQuestion3', value);
       }
     },
   }

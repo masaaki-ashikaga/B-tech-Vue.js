@@ -9,15 +9,9 @@ const mutations = {
         state.message = newMessage;
     },
 };
-const actions = {
-    updateMessage({commit}, newMessage){
-        commit('updateMessage', newMessage);
-    },
-};
 
 export default {
     state,
     getters,
     mutations,
-    actions,
 };
