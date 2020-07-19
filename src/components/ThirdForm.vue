@@ -8,14 +8,14 @@
     <form>
       <div>
         <p class="has-text-weight-bold has-text-link mb-5">-ご相談内容-</p>
-        <textarea class="textarea" rows="10"></textarea>
+        <textarea class="textarea" rows="10" v-model="message"></textarea>
       </div>
     </form>
   </div>
 </div>
 <div class="has-text-centered">
   <router-link to="/second" class="button is-primary mr-6">前に戻る</router-link>
-  <router-link to="" class="button is-primary">次へ進む</router-link>
+  <router-link to="/check" class="button is-primary" @click="goResultCheckPage">次へ進む</router-link>
 </div>
 </div>
 </template>
@@ -23,6 +23,16 @@
 <script>
 import 'bulma/css/bulma.css';
 export default {
+  computed: {
+    message: {
+      get() {
+        return this.$store.getters.message;
+      },
+      set(value) {
+        this.$store.commit('updateMessage', value);
+      }
+    }
+  },
 }
 </script>
 
