@@ -13,7 +13,7 @@
                 <td>{{key + 1}}</td>
                 <td>{{task}}</td>
                 <td><button>作業中</button></td>
-                <td><button>削除</button></td>
+                <td><button @click="deleteTask(key)">削除</button></td>
             </tr>
         </table>
 
@@ -37,6 +37,9 @@ export default {
         addTask: function(){
             this.tasks.push(this.input);
             this.input = "";
+        },
+        deleteTask: function(key){
+            this.tasks.splice(key, 1);
         }
     }
 }
