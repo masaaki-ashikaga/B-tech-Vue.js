@@ -11,8 +11,9 @@
             <tr><th>ID</th><th>コメント</th><th>状態</th></tr>
             <tr v-for="(task, key) in tasks" :key="key">
                 <td>{{key + 1}}</td>
-                <td>{{task}}</td>
-                <td><button>作業中</button></td>
+                <td>{{task.name}}</td>
+                <td v-if="task.isDone"><button @click="changeWorking(key)">完了</button></td>
+                <td v-else><button @click="changeComplete(key)">作業中</button></td>
                 <td><button @click="deleteTask(key)">削除</button></td>
             </tr>
         </table>
@@ -35,12 +36,25 @@ export default {
     },
     methods: {
         addTask: function(){
-            this.tasks.push(this.input);
+            if(this.input === ''){
+                return;
+            }
+            var todo = {
+                name : this.input,
+                isDone: false
+            };
+            this.tasks.push(todo);
             this.input = "";
         },
         deleteTask: function(key){
             this.tasks.splice(key, 1);
-        }
+        },
+        changeComplete: function(key){
+            this.tasks[key].isDone = true;
+        },
+        changeWorking: function(key){
+            this.tasks[key].isDone = false;
+        },
     }
 }
 </script>
