@@ -12,8 +12,7 @@
             <tr v-for="(task, key) in tasks" :key="key">
                 <td>{{key + 1}}</td>
                 <td>{{task.name}}</td>
-                <td v-if="task.isDone"><button @click="changeWorking(key)">完了</button></td>
-                <td v-else><button @click="changeComplete(key)">作業中</button></td>
+                <td><button @click="changeStatus(key)">{{task.status}}</button></td>
                 <td><button @click="deleteTask(key)">削除</button></td>
             </tr>
         </table>
@@ -23,6 +22,7 @@
             <input type="text" class="mr-3" v-model="input">
             <button @click="addTask">追加</button>
         </div>
+        <pre>{{$data}}</pre>
     </div>
 </template>
 
@@ -39,9 +39,10 @@ export default {
             if(this.input === ''){
                 return;
             }
-            var todo = {
+            const todo = {
                 name : this.input,
-                isDone: false
+                isDone: false,
+                status: '作業中',
             };
             this.tasks.push(todo);
             this.input = "";
@@ -49,11 +50,9 @@ export default {
         deleteTask: function(key){
             this.tasks.splice(key, 1);
         },
-        changeComplete: function(key){
-            this.tasks[key].isDone = true;
-        },
-        changeWorking: function(key){
-            this.tasks[key].isDone = false;
+        changeStatus: function(key){
+            this.tasks[key].isDone = !this.tasks[key].isDone;
+            this.tasks[key].isDone ? this.tasks[key].status = '完了' : this.tasks[key].status = '作業中';
         },
     }
 }
