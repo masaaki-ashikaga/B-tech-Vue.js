@@ -2,9 +2,9 @@
     <div class="ml-3">
         <h1 class="has-text-weight-bold is-size-2 mb-3">ToDoリスト</h1>
         <div class="mb-4">
-            <label for="all" class="mr-3"><input type="radio" value="all" v-model="filter">すべて</label>
-            <label for="working" class="mr-3"><input type="radio" value="working" v-model="filter">作業中</label>
-            <label for="completed"><input type="radio" value="completed" v-model="filter">完了</label>
+            <label for="all" class="mr-3"><input type="radio" value="all" v-model="statusRadioButton">すべて</label>
+            <label for="working" class="mr-3"><input type="radio" value="working" v-model="statusRadioButton">作業中</label>
+            <label for="completed"><input type="radio" value="completed" v-model="statusRadioButton">完了</label>
         </div>
 
         <table class="mb-4">
@@ -12,11 +12,11 @@
                 <tr><th>ID</th><th>コメント</th><th>状態</th></tr>
             </thead>
             <tbody>
-                <tr v-for="task in showTasks" :key="task.value">
+                <tr v-for="task in computedTasks" :key="task.value">
                     <td>{{task.id}}</td>
                     <td>{{task.name}}</td>
-                    <td><button @click="changeStatus(showTasks.indexOf(task))">{{task.status}}</button></td>
-                    <td><button @click="deleteTask(showTasks.indexOf(task))">削除</button></td>
+                    <td><button @click="changeStatus(computedTasks.indexOf(task))">{{task.status}}</button></td>
+                    <td><button @click="deleteTask(computedTasks.indexOf(task))">削除</button></td>
                 </tr>
             </tbody>
         </table>
@@ -35,7 +35,7 @@ export default {
         return {
             input: '',
             tasks: [],
-            filter: 'all',
+            statusRadioButton: 'all',
         }
     },
     methods: {
@@ -72,8 +72,8 @@ export default {
         },
     },
     computed: {
-        showTasks() {
-            switch(this.filter){
+        computedTasks() {
+            switch(this.statusRadioButton){
                 case 'all':
                     return this.tasks;
                 case 'working':
