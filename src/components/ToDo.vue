@@ -2,19 +2,23 @@
     <div class="ml-3">
         <h1 class="has-text-weight-bold is-size-2 mb-3">ToDoリスト</h1>
         <div class="mb-4">
-            <label for="all" class="mr-3"><input type="radio" id="all" name="status" value="すべて">すべて</label>
-            <label for="working" class="mr-3"><input type="radio" id="working" name="status" value="作業中">作業中</label>
-            <label for="completed"><input type="radio" id="completed" name="status" value="完了">完了</label>
+            <label for="all" class="mr-3"><input type="radio" value="all" v-model="statusRadioButton">すべて</label>
+            <label for="working" class="mr-3"><input type="radio" value="working" v-model="statusRadioButton">作業中</label>
+            <label for="completed"><input type="radio" value="completed" v-model="statusRadioButton">完了</label>
         </div>
 
         <table class="mb-4">
-            <tr><th>ID</th><th>コメント</th><th>状態</th></tr>
-            <tr v-for="(task, key) in tasks" :key="key">
-                <td>{{key + 1}}</td>
-                <td>{{task.name}}</td>
-                <td><button @click="changeStatus(key)">{{task.status}}</button></td>
-                <td><button @click="deleteTask(key)">削除</button></td>
-            </tr>
+            <thead>
+                <tr><th>ID</th><th>コメント</th><th>状態</th></tr>
+            </thead>
+            <tbody>
+                <tr v-for="task in computedTasks" :key="task.value">
+                    <td>{{task.id}}</td>
+                    <td>{{task.name}}</td>
+                    <td><button @click="changeStatus(computedTasks.indexOf(task))">{{task.status}}</button></td>
+                    <td><button @click="deleteTask(computedTasks.indexOf(task))">削除</button></td>
+                </tr>
+            </tbody>
         </table>
 
         <div>
@@ -22,7 +26,6 @@
             <input type="text" class="mr-3" v-model="input">
             <button @click="addTask">追加</button>
         </div>
-        <pre>{{$data}}</pre>
     </div>
 </template>
 
@@ -32,6 +35,7 @@ export default {
         return {
             input: '',
             tasks: [],
+            statusRadioButton: 'all',
         }
     },
     methods: {
@@ -44,16 +48,42 @@ export default {
                 isDone: false,
                 status: '作業中',
             };
+
             this.tasks.push(todo);
+            this.tasks.forEach((task, index) => {
+                task.id = index + 1;
+            });
             this.input = "";
         },
-        deleteTask: function(key){
-            this.tasks.splice(key, 1);
+        deleteTask: function(index){
+            this.tasks.splice(index, 1);
+            this.tasks.forEach((task, index) => {
+                task.id = index + 1;
+            });
         },
-        changeStatus: function(key){
-            this.tasks[key].isDone = !this.tasks[key].isDone;
-            this.tasks[key].isDone ? this.tasks[key].status = '完了' : this.tasks[key].status = '作業中';
+        changeStatus: function(index){
+            if(this.tasks[index].status === '作業中'){
+                this.tasks[index].status = '完了';
+                this.tasks[index].isDone = !this.tasks[index].isDone;
+            } else{
+                this.tasks[index].status = '作業中';
+                this.tasks[index].isDone = !this.tasks[index].isDone;
+            }
         },
-    }
+    },
+    computed: {
+        computedTasks() {
+            switch(this.statusRadioButton){
+                case 'all':
+                    return this.tasks;
+                case 'working':
+                    return this.tasks.filter(task => !task.isDone);
+                case 'completed':
+                    return this.tasks.filter(task => task.isDone);
+                default:
+                    return []
+            }
+        }
+    },
 }
 </script>
